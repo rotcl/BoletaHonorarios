@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Boleta de Honorarios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css" />
+
+  </head>
+  <body class="has-background-primary">
+    <div class="section">
+      <div class="container has-text-centered">
+          <h1 class="title is-1">Boleta de Honorarios</h1>
+          <h3 class="subtitle is-3">Ingresa el valor a calcular</h3>
+          <input id="valorInicial" class="input is-medium is-primary" type="text" name="inicial" placeholder="$" onkeyup="procesar()">        
+      </div>
+    </div>
+    <div class="section">
+      <div class="columns">
+        <div class="column has-text-centered is-size-5">
+          <h4 class="subtitle is-3">Líquido</h4>
+          Si lo pactado fue en valores líquidos, <br>
+          deberás hacer la boleta por <label class="has-background-white-bis"> $<span id="liquidoHacer"></span> </label> y recibirás:
+          <label class="has-background-white-bis"> $<span id="liquidoRecibir"></span> </label> en efectivo.
+        </div>
+        <div class="column has-text-centered is-size-5">
+          <h4 class="subtitle is-3">Bruto</h4>
+          Si lo pactado fue en valores brutos, <br>
+          deberás hacer la boleta por <label class="has-background-white-bis"> $<span id="brutoHacer"> </label> y recibirás:
+          <label class="has-background-white-bis"> $<span id="brutoRecibir"> </label> en efectivo.
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+        <div class="has-text-centered">
+          <p>
+            <strong>boletaH</strong> made with 💖 by <strong><a href="https://irot.cl" target="_blank">rotcl</a></strong>.
+            Using <a href="https://electronjs.org/" target="_blank">ElectronJS</a> - <a href="https://bulma.io/" target="_blank">BulmaCSS</a> 
+          </p>
+        </div>
+      </footer>
+    <style>
+      .footer{
+        padding: 1em 1.5em;
+      }
+    </style>
+    <script>
+      require('./renderer.js')
+      var liquidoHacer = 0;
+      var liquidoRecibir = 0;
+      var brutoHacer = 0;
+      var brutoRecibir = 0;
+      function procesar(){
+        const calcBruto = 0.9;
+        const calcLiquido = 1.111111111111111112;
+        
+        var x = document.getElementById("valorInicial").value;
+        document.getElementById("liquidoHacer").innerHTML = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'CLP' }).format(x * calcLiquido);
+        document.getElementById("liquidoRecibir").innerHTML = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'CLP' }).format(x) ;
+        document.getElementById("brutoHacer").innerHTML = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'CLP' }).format(x) ;
+        document.getElementById("brutoRecibir").innerHTML = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'CLP' }).format(x * calcLiquido) ;
+
+        
+      }
+    </script>
+  </body>
+</html>
